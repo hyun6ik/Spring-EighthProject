@@ -6,7 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import springeighthproject.spring_jpa.domain.item.Book;
+import springeighthproject.spring_jpa.domain.item.Item;
 import springeighthproject.spring_jpa.service.ItemService;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -33,4 +36,10 @@ public class ItemController {
         return "redirect:/items";
     }
 
+    @GetMapping("items")
+    public String list(Model model){
+        List<Item> items = itemService.findItems();
+        model.addAttribute("items", items);
+        return "items/itemList";
+    }
 }
