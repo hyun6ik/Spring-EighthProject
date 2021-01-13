@@ -3,6 +3,7 @@ package springeighthproject.spring_jpa.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import springeighthproject.spring_jpa.domain.item.Book;
 import springeighthproject.spring_jpa.domain.item.Item;
 import springeighthproject.spring_jpa.repository.ItemRepository;
 
@@ -18,6 +19,15 @@ public class ItemService {
     @Transactional
     public void saveItem(Item item){
         itemRepository.save(item);
+    }
+
+    @Transactional
+    public void updateItem(Long itemId, String name, int price, int stockQuantity){
+        Item findItem = itemRepository.findOne(itemId);
+        findItem.setName(name);
+        findItem.setPrice(price);
+        findItem.setStockQuantity(stockQuantity);
+
     }
 
     public List<Item> findItems(){
